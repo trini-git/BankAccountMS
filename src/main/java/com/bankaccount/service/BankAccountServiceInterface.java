@@ -7,4 +7,5 @@ import reactor.core.publisher.Mono;
 public interface BankAccountServiceInterface {
 
 	Mono<BankAccountModel> insertBankAccount(BankAccountModel bankAccountModel);
+	Mono<BankAccountModel> updateAmountBankAccount(BankAccountModel bankAccountModel, String accountNumber, Double amount);	
 }

@@ -1,7 +1,9 @@
 package com.bankaccount.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,5 +24,14 @@ public class BankAccountController {
 	public Mono<BankAccountModel> insertBankAccount(@RequestBody BankAccountModel bankAccountModel){
 		
 		return bankAccountService.insertBankAccount(bankAccountModel);
+	}
+	
+	@PutMapping("/update-amount/{accountNumber}/{amount}")
+	public Mono<BankAccountModel> updateAmountBankAccount(
+			@RequestBody BankAccountModel bankAccountModel, 
+			@PathVariable String accountNumber,
+			@PathVariable Double amount){
+		
+		return bankAccountService.updateAmountBankAccount(bankAccountModel, accountNumber, amount);
 	}
 }
