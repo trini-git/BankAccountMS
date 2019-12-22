@@ -20,15 +20,13 @@ public class BankAccountService implements BankAccountServiceInterface {
 		return bankAccountRepositoryInterface.save(bankAccountModel);
 	}
 
-	/* Function to update the total amount through the account number */
 	@Override
-	public Mono<BankAccountModel> updateAmountBankAccount(BankAccountModel bankAccountModel, String accountNumber, Double amount) {
+	public Mono<BankAccountModel> updateAmount(BankAccountModel newBankAccountModel) {
 		
-		return bankAccountRepositoryInterface.findByAccountNumber(accountNumber)
-				.flatMap(newBankAccountModel -> {
-					newBankAccountModel.setAmount(bankAccountModel.getAmount());
-					return bankAccountRepositoryInterface.save(newBankAccountModel);
+		return bankAccountRepositoryInterface.findByAccountNumber(newBankAccountModel.getAccountNumber())
+				.flatMap(oldBankAccountModel -> {
+					oldBankAccountModel.setAmount(newBankAccountModel.getAmount());
+					return bankAccountRepositoryInterface.save(oldBankAccountModel);
 				});
-						
 	}
 }

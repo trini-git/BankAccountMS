@@ -25,13 +25,13 @@ public class BankAccountController {
 		
 		return bankAccountService.insertBankAccount(bankAccountModel);
 	}
-	
-	@PutMapping("/update-amount/{accountNumber}/{amount}")
-	public Mono<BankAccountModel> updateAmountBankAccount(
-			@RequestBody BankAccountModel bankAccountModel, 
-			@PathVariable String accountNumber,
-			@PathVariable Double amount){
 		
-		return bankAccountService.updateAmountBankAccount(bankAccountModel, accountNumber, amount);
+	@PutMapping("/update-amount")
+	public Mono<BankAccountModel> updateAmount(
+			@RequestBody BankAccountModel bankAccountModel){
+		
+		return bankAccountService.updateAmount(bankAccountModel);
 	}
 }
+
+
