@@ -1,8 +1,11 @@
 package com.bankaccount.controller;
 
 import com.bankaccount.model.BankAccountModel;
+import com.bankaccount.model.CreditCardModel;
 import com.bankaccount.service.BankAccountService;
+import com.bankaccount.service.CreditCardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,26 +16,27 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/bank-account")
-public class BankAccountController {
-
+@RequestMapping("/credit-card")
+public class CreditCardController {
+  
+  @Autowired
+  CreditCardService creditCardService;
+  
   @Autowired
   BankAccountService bankAccountService;
   
-  @GetMapping("/find-by/{accountNumber}")
-  public Mono<BankAccountModel> findByAccountNumber(@PathVariable String accountNumber) {
-    return bankAccountService.findByAccountNumber(accountNumber);
-  }
-
   @PostMapping("/insert")
-  public Mono<BankAccountModel> insertBankAccount(@RequestBody BankAccountModel bankAccountModel) {
-    return bankAccountService.insertBankAccount(bankAccountModel);
+  public Mono<CreditCardModel> insertCreditCardModel(@RequestBody CreditCardModel creditCardModel) {
+    
+    return creditCardService.insertCreditCard(creditCardModel);
+    
   }
-
+  
   @PutMapping("/update-amount")
-  public Mono<BankAccountModel> updateAmount(@RequestBody BankAccountModel bankAccountModel) {
-    return bankAccountService.updateAmount(bankAccountModel);
+  public Mono<CreditCardModel> updateAmount(@RequestBody CreditCardModel creditCardModel) {
+    
+    return creditCardService.updateAmount(creditCardModel);
+    
   }
+  
 }
-
-
